@@ -36,6 +36,11 @@ public class T02_HowToCreateThread {
         new MyThread().start();
         new Thread(new MyRunnable()).start();
         new Thread(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("Hello Lambda");
         }).start();
 
