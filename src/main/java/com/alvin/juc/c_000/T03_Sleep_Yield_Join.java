@@ -219,8 +219,8 @@ public class T03_Sleep_Yield_Join {
          * -----------B99
          */
 
-        testYield();
-
+//        testYield();
+        testJoin();
     }
 
     static void testSleep() {
@@ -254,5 +254,37 @@ public class T03_Sleep_Yield_Join {
                 }
             }
         }).start();
+    }
+
+    static void testJoin() {
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 100; i++) {
+                System.out.println("A" + i);
+                try {
+                    TimeUnit.MICROSECONDS.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            try {
+                t1.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            for (int i = 0; i < 100; i++) {
+                System.out.println("B" + i);
+                try {
+                    TimeUnit.MICROSECONDS.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t2.start();
+        t1.start();
+
     }
 }
