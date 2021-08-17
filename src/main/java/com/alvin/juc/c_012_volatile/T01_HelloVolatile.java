@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class T01_HelloVolatile {
-    volatile boolean running = true;
+    /*volatile*/ boolean running = true;
 
     void m() {
         System.out.println("m started");
